@@ -1,5 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import { vuexOidcCreateRouterMiddleware } from "vuex-oidc";
+import store from "@/store";
 
 import Home from "../views/Home.vue";
 import Callback from "../views/auth/Callback.vue";
@@ -48,5 +50,6 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 });
+router.beforeEach(vuexOidcCreateRouterMiddleware(store));
 
 export default router;
