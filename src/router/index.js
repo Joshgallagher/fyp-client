@@ -22,7 +22,7 @@ const routes = [
   },
   {
     path: "/signup",
-    name: "SignUp",
+    name: "sign-up",
     component: SignUp,
     meta: {
       isPublic: true
