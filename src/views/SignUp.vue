@@ -39,8 +39,16 @@
           <input
             type="submit"
             value="Sign up"
-            class="py-3 bg-teal-400 font-bold text-white rounded shadow-none border-none hover:bg-teal-600 cursor-pointer transition linear duration-500"
+            class="mb-4 py-3 bg-teal-400 font-bold text-white rounded shadow-none border-none hover:bg-teal-600 cursor-pointer transition linear duration-500"
           />
+          <p class="text-center">
+            Already have an account?
+            <a
+              class="text-teal-400 hover:underline cursor-pointer"
+              @click="logIn"
+              >Log in</a
+            >
+          </p>
         </form>
       </div>
     </main>
