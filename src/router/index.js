@@ -14,7 +14,10 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Home,
+    meta: {
+      isPublic: true
+    }
   },
   {
     path: "/about",
@@ -23,7 +26,10 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
+      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+    meta: {
+      isPublic: true
+    }
   },
   {
     path: "/callback",
@@ -50,6 +56,6 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 });
-router.beforeEach(vuexOidcCreateRouterMiddleware(store));
+router.beforeEach(vuexOidcCreateRouterMiddleware(store, "auth"));
 
 export default router;
