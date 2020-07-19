@@ -4,6 +4,7 @@ import { vuexOidcCreateRouterMiddleware } from "vuex-oidc";
 import store from "@/store";
 
 import Home from "../views/Home.vue";
+import SignUp from "../views/SignUp.vue";
 import Callback from "../views/auth/Callback.vue";
 import PopupCallback from "../views/auth/PopupCallback.vue";
 import ErrorCallback from "../views/auth/ErrorCallback.vue";
@@ -15,6 +16,14 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
+    meta: {
+      isPublic: true
+    }
+  },
+  {
+    path: "/signup",
+    name: "SignUp",
+    component: SignUp,
     meta: {
       isPublic: true
     }
