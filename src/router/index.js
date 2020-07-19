@@ -1,6 +1,12 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import { vuexOidcCreateRouterMiddleware } from "vuex-oidc";
+import store from "@/store";
+
 import Home from "../views/Home.vue";
+import Callback from "../views/auth/Callback.vue";
+import PopupCallback from "../views/auth/PopupCallback.vue";
+import ErrorCallback from "../views/auth/ErrorCallback.vue";
 
 Vue.use(VueRouter);
 
@@ -8,7 +14,10 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Home,
+    meta: {
+      isPublic: true
+    }
   },
   {
     path: "/about",
@@ -17,7 +26,28 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
+      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+    meta: {
+      isPublic: true
+    }
+  },
+  {
+    path: "/callback",
+    name: "Callback",
+    component: Callback
+  },
+  {
+    path: "/popup-callback",
+    name: "PopupCallback",
+    component: PopupCallback
+  },
+  {
+    path: "/callback-error",
+    name: "ErrorCallback",
+    component: ErrorCallback,
+    meta: {
+      isPublic: true
+    }
   }
 ];
 
@@ -26,5 +56,6 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 });
+router.beforeEach(vuexOidcCreateRouterMiddleware(store, "auth"));
 
 export default router;
