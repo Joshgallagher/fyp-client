@@ -1,8 +1,6 @@
 <template>
   <div class="flex flex-col min-h-screen bg-gray-100">
-    <header class="py-6 px-12">
-      <h1 class="text-teal-400 font-bold text-xl">Pondr.</h1>
-    </header>
+    <navigation-bar />
     <main class="flex-grow flex justify-center items-center">
       <div class="grid grid-cols-12 min-w-full">
         <h1 class="col-start-5 col-end-9 text-4xl font-bold">
@@ -103,8 +101,13 @@
 import { mapGetters, mapActions } from "vuex";
 import axios from "axios";
 
+import NavigationBar from "@/components/NavigationBar";
+
 export default {
-  name: "SignUp",
+  name: "sign-up",
+  components: {
+    NavigationBar
+  },
   data() {
     return {
       form: {

@@ -4,11 +4,9 @@
     <main class="flex-grow">
       <div class="grid grid-cols-6 gap-8">
         <div class="col-start-2 col-end-6">
-          <h1 class="font-bold text-4xl">
-            Home
-          </h1>
+          <h1 class="font-bold text-4xl">{{ author.name }}'s posts</h1>
           <p class="text-xl text-gray-700">
-            Find out what people have been writing about.
+            Find out what {{ author.name }} has been writing about.
           </p>
         </div>
         <template v-for="(article, i) in articles">
@@ -32,30 +30,35 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import store from "@/store";
 
 import NavigationBar from "@/components/NavigationBar";
 import ArticleItem from "@/components/ArticleItem";
 
 export default {
-  name: "Home",
+  name: "profile",
   components: {
     NavigationBar,
     ArticleItem
   },
-  mounted() {
-    this.getArticles();
+  beforeRouteEnter(to, from, next) {
+    store
+      .dispatch("user/getAuthorProfile", to.params.userId)
+      .then(() => next());
+
+    store
+      .dispatch("article/getAuthorArticles", to.params.userId)
+      .then(() => next());
   },
   computed: {
     ...mapGetters({
-      authUser: "auth/oidcUser",
-      articles: "article/articles"
+      articles: "article/articles",
+      author: "user/author"
     })
   },
   methods: {
     ...mapActions({
-      logIn: "auth/authenticateOidcPopup",
-      signOut: "auth/signOutOidc",
-      getArticles: "article/getArticles"
+      getArticles: "article/getAuthorArticles"
     })
   }
 };
