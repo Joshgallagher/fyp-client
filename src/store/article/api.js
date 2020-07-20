@@ -32,3 +32,9 @@ export const getOne = async slug => {
 
   return data;
 };
+
+export const getAllAuthors = async userId => {
+  const { data } = await axios.get(`articles/user/${userId}`);
+
+  return data;
+};

@@ -41,7 +41,30 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+import store from "@/store";
+
+import ArticleItem from "@/components/ArticleItem";
+
 export default {
-  name: "profile"
+  name: "profile",
+  components: {
+    ArticleItem
+  },
+  beforeRouteEnter(to, from, next) {
+    store
+      .dispatch("article/getAuthorArticles", to.params.userId)
+      .then(() => next());
+  },
+  computed: {
+    ...mapGetters({
+      articles: "article/articles"
+    })
+  },
+  methods: {
+    ...mapActions({
+      getArticles: "article/getAuthorArticles"
+    })
+  }
 };
 </script>
