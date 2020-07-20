@@ -12,7 +12,7 @@
     </p>
     <hr class="border-gray-200" />
     <router-link
-      :to="{ name: 'profile', params: { uuid: article.userId } }"
+      :to="{ name: 'profile', params: { userId: article.userId } }"
       class="flex flex-row px-4 py-4 hover:bg-gray-100 transition linear duration-500"
     >
       <img
