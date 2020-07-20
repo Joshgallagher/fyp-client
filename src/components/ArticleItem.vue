@@ -1,9 +1,11 @@
 <template>
   <router-link
     :to="{ name: 'home' }"
-    class="block shadow-md rounded bg-white hover:shadow-xl transition linear duration-500"
+    class="group block shadow-md rounded bg-white hover:shadow-xl transition linear duration-500"
   >
-    <h1 class="pt-4 px-4 font-bold text-3xl mb-4">
+    <h1
+      class="pt-4 px-4 font-bold text-3xl mb-4 group-hover:text-teal-400 transition linear duration-500"
+    >
       {{ article.title }}
     </h1>
     <p class="mb-6 px-4 text-gray-700">
