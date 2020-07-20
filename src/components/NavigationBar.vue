@@ -26,7 +26,7 @@
         Home
       </router-link>
       <router-link
-        :to="{ name: 'home' }"
+        :to="{ name: 'bookmarks' }"
         class="hover:text-teal-400 transition linear duration-500 mr-6"
         :class="{ 'underline text-teal-400': isBookmarksRoute }"
       >

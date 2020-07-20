@@ -5,6 +5,7 @@ import store from "@/store";
 
 import Home from "../views/Home.vue";
 import Profile from "../views/Profile.vue";
+import Bookmarks from "../views/Bookmarks.vue";
 import SignUp from "../views/SignUp.vue";
 import Callback from "../views/auth/Callback.vue";
 import PopupCallback from "../views/auth/PopupCallback.vue";
@@ -27,6 +28,14 @@ const routes = [
     component: Profile,
     meta: {
       isPublic: true
+    }
+  },
+  {
+    path: "/bookmarks",
+    name: "bookmarks",
+    component: Bookmarks,
+    meta: {
+      isPublic: false
     }
   },
   {
