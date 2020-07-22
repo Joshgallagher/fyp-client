@@ -32,7 +32,7 @@
       </router-link>
       <router-link
         :to="{ name: 'profile', params: { userId: authUser.sub } }"
-        class="group flex flex-row items-center mr-6 p-1 rounded-full shadow-md bg-white hover:shadow-xl transition linear duration-500"
+        class="group flex flex-row items-center mr-6 border-r-2"
       >
         <img
           src="https://uifaces.co/our-content/donated/T5rm0m7W.jpg"
@@ -40,14 +40,14 @@
           class="w-10 h-auto rounded-full"
         />
         <p
-          class="font-bold text-gray-700 px-3 group-hover:text-teal-400 transition linear duration-500"
+          class="font-bold pl-3 pr-5 group-hover:text-teal-400 transition linear duration-500"
           :class="{ 'text-teal-400': isMyProfileRoute }"
         >
           {{ authUser.name }}
         </p>
       </router-link>
       <a
-        class="text-teal-400 rounded cursor-pointer hover:text-teal-600 transition linear duration-500"
+        class="text-teal-400 font-bold rounded cursor-pointer hover:text-teal-600 transition linear duration-500"
         @click="signOut"
         >Log out</a
       >

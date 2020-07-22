@@ -41,10 +41,16 @@
       </span>
       <template v-if="authUser">
         <button v-if="isBookmarked" @click.prevent="bookmark">
-          unBookmark
+          <ion-icon
+            name="bookmark"
+            class="text-xl hover:text-teal-400 transition linear duration-500"
+          ></ion-icon>
         </button>
         <button v-else @click.prevent="bookmark">
-          Bookmark
+          <ion-icon
+            name="bookmark-outline"
+            class="text-xl hover:text-teal-400 transition linear duration-500"
+          ></ion-icon>
         </button>
       </template>
     </router-link>
