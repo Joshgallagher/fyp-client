@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import { EventBus } from "@/main";
 import { mapGetters } from "vuex";
 import { create, remove } from "@/store/bookmark/api";
 
@@ -32,6 +33,11 @@ export default {
       type: String,
       default: "xl"
     }
+  },
+  mounted() {
+    EventBus.$on("bookmark:bookmarked", e =>
+      this.article.slug === e.slug ? (this.isBookmarked = e.isBookmarked) : null
+    );
   },
   data() {
     return {
@@ -49,13 +55,23 @@ export default {
 
       if (this.isBookmarked) {
         await remove(slug);
+
         this.isBookmarked = false;
+        EventBus.$emit("bookmark:bookmarked", {
+          slug: this.article.slug,
+          isBookmarked: false
+        });
 
         return;
       }
 
       await create(slug);
+
       this.isBookmarked = true;
+      EventBus.$emit("bookmark:bookmarked", {
+        slug: this.article.slug,
+        isBookmarked: true
+      });
     }
   }
 };
