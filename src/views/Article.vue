@@ -1,8 +1,10 @@
 <template>
   <div class="flex flex-col min-h-screen bg-gray-100">
+    <comments-sidebar :article="article" />
     <div class="fixed floatingBar flex flex-col ml-10">
       <rating-button :article="article" class="mb-4" />
       <button
+        @click="viewComments"
         class="text-2xl hover:text-teal-400 transition linear duration-500 mb-4 flex flex-row items-center"
       >
         <ion-icon name="chatbubble-outline"></ion-icon>
@@ -131,12 +133,14 @@
 <script>
 import moment from "moment";
 import store from "@/store";
+import { EventBus } from "@/main";
 import { mapGetters } from "vuex";
 
 import NavigationBar from "@/components/NavigationBar";
 import ReadingTime from "@/components/ReadingTime";
 import BookmarkButton from "@/components/BookmarkButton";
 import RatingButton from "@/components/RatingButton";
+import CommentsSidebar from "@/components/CommentsSidebar";
 
 export default {
   name: "article-view",
@@ -144,7 +148,8 @@ export default {
     NavigationBar,
     ReadingTime,
     BookmarkButton,
-    RatingButton
+    RatingButton,
+    CommentsSidebar
   },
   beforeRouteEnter(to, from, next) {
     store.dispatch("article/getArticle", to.params.slug).then(() => next());
@@ -156,6 +161,11 @@ export default {
     }),
     createdAt() {
       return moment(this.article.createdAt).format("MMM YY");
+    }
+  },
+  methods: {
+    viewComments() {
+      EventBus.$emit("comments:open", {});
     }
   }
 };
