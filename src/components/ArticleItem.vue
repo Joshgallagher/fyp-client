@@ -39,19 +39,21 @@
           </span>
         </span>
       </span>
-      <button v-if="isBookmarked" @click.prevent="bookmark">
-        unBookmark
-      </button>
-      <button v-else @click.prevent="bookmark">
-        Bookmark
-      </button>
+      <template v-if="authUser">
+        <button v-if="isBookmarked" @click.prevent="bookmark">
+          unBookmark
+        </button>
+        <button v-else @click.prevent="bookmark">
+          Bookmark
+        </button>
+      </template>
     </router-link>
   </router-link>
 </template>
 
 <script>
 import moment from "moment";
-import { mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import { create, remove } from "@/store/bookmark/api";
 
 import ReadingTime from "./ReadingTime";
@@ -66,6 +68,9 @@ export default {
     };
   },
   computed: {
+    ...mapGetters({
+      authUser: "auth/oidcUser"
+    }),
     createdAt() {
       return moment(this.article.createdAt).format("MMM YY");
     }

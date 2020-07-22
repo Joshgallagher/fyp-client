@@ -7,15 +7,13 @@
       <router-link
         :to="{ name: 'sign-up' }"
         class="mr-4 px-4 py-2 bg-teal-400 text-white rounded font-bold hover:bg-teal-600 transition linear duration-500"
+        >Sign up</router-link
       >
-        Sign up
-      </router-link>
       <a
         class="px-4 py-2 text-teal-400 rounded font-bold cursor-pointer hover:text-teal-600 transition linear duration-500"
         @click="logIn"
+        >Log in</a
       >
-        Log in
-      </a>
     </span>
     <span v-else class="flex flex-row items-center">
       <router-link
