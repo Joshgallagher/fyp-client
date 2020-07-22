@@ -40,7 +40,7 @@
           class="w-10 h-auto rounded-full"
         />
         <p
-          class="font-bold pl-3 pr-5 group-hover:text-teal-400 transition linear duration-500"
+          class="font-medium pl-3 pr-5 text-black group-hover:text-teal-400 transition linear duration-500"
           :class="{ 'text-teal-400': isMyProfileRoute }"
         >
           {{ authUser.name }}

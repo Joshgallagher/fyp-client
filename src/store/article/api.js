@@ -39,7 +39,16 @@ export const getOne = async slug => {
 };
 
 export const getAllAuthors = async userId => {
-  const { data } = await axios.get(`articles/user/${userId}`);
+  const token = store.state.auth.access_token;
+  const requestConfig = {
+    headers: {
+      Authorization: `Bearer ${store.state.auth.access_token}`
+    }
+  };
+  const { data } = await axios.get(
+    `articles/user/${userId}`,
+    token !== null ? requestConfig : {}
+  );
 
   return data;
 };
