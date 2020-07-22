@@ -1,4 +1,5 @@
 import axios from "axios";
+import store from "@/store";
 
 export const create = async (token, title, body) => {
   let response = null;
@@ -7,12 +8,7 @@ export const create = async (token, title, body) => {
     response = await axios.post(
       "articles",
       { title, body },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
-        }
-      }
+      { headers: { Authorization: `Bearer ${token}` } }
     );
   } catch (e) {
     return e;
@@ -22,7 +18,16 @@ export const create = async (token, title, body) => {
 };
 
 export const getAll = async () => {
-  const { data } = await axios.get("articles");
+  const token = store.state.auth.access_token;
+  const requestConfig = {
+    headers: {
+      Authorization: `Bearer ${store.state.auth.access_token}`
+    }
+  };
+  const { data } = await axios.get(
+    "articles",
+    token !== null ? requestConfig : {}
+  );
 
   return data;
 };
@@ -34,7 +39,16 @@ export const getOne = async slug => {
 };
 
 export const getAllAuthors = async userId => {
-  const { data } = await axios.get(`articles/user/${userId}`);
+  const token = store.state.auth.access_token;
+  const requestConfig = {
+    headers: {
+      Authorization: `Bearer ${store.state.auth.access_token}`
+    }
+  };
+  const { data } = await axios.get(
+    `articles/user/${userId}`,
+    token !== null ? requestConfig : {}
+  );
 
   return data;
 };

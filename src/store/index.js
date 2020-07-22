@@ -6,6 +6,7 @@ import authConfig from "../config/auth";
 import { vuexOidcCreateStoreModule } from "vuex-oidc";
 import article from "./article";
 import user from "./user";
+import bookmark from "./bookmark";
 
 Vue.use(Vuex);
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
       dispatchEventsOnWindow: true
     }),
     article,
-    user
+    user,
+    bookmark
   }
 });

@@ -7,6 +7,7 @@ import store from "./store";
 axios.defaults.baseURL = process.env.VUE_APP_API_GATEWAY_URI;
 
 Vue.config.productionTip = false;
+Vue.config.ignoredElements = [/^ion-/];
 
 new Vue({
   router,
