@@ -1,5 +1,20 @@
 <template>
   <div class="flex flex-col min-h-screen bg-gray-100">
+    <div class="fixed floatingBar flex flex-col ml-10">
+      <button
+        class="text-2xl hover:text-teal-400 transition linear duration-500 mb-4 flex flex-row items-center"
+      >
+        <ion-icon name="heart-outline"></ion-icon>
+        <p class="text-sm text-gray-700 pl-2">{{ article.rating }}</p>
+      </button>
+      <button
+        class="text-2xl hover:text-teal-400 transition linear duration-500 mb-4 flex flex-row items-center"
+      >
+        <ion-icon name="chatbubble-outline"></ion-icon>
+        <p class="text-sm text-gray-700 pl-2">{{ article.commentsCount }}</p>
+      </button>
+      <bookmark-button :article="article" size="2xl" />
+    </div>
     <navigation-bar />
     <main class="flex-grow bg-white">
       <div class="grid grid-cols-6 gap-8">
@@ -39,6 +54,74 @@
             </span>
             <bookmark-button :article="article" />
           </router-link>
+          <div class="mt-8 mb-8">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt
+            ipsam accusantium quod earum debitis obcaecati, incidunt rem dolor
+            fugit est quidem aspernatur. Nesciunt, fugiat iusto commodi veniam
+            accusantium eligendi excepturi. Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. Deserunt ipsam accusantium quod earum
+            debitis obcaecati, incidunt rem dolor fugit est quidem aspernatur.
+            Nesciunt, fugiat iusto commodi veniam accusantium eligendi
+            excepturi. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Deserunt ipsam accusantium quod earum debitis obcaecati, incidunt
+            rem dolor fugit est quidem aspernatur. Nesciunt, fugiat iusto
+            commodi veniam accusantium eligendi excepturi. Lorem ipsum dolor sit
+            amet consectetur adipisicing elit. Deserunt ipsam accusantium quod
+            earum debitis obcaecati, incidunt rem dolor fugit est quidem
+            aspernatur. Nesciunt, fugiat iusto commodi veniam accusantium
+            eligendi excepturi. Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Deserunt ipsam accusantium quod earum debitis
+            obcaecati, incidunt rem dolor fugit est quidem aspernatur. Nesciunt,
+            fugiat iusto commodi veniam accusantium eligendi excepturi. Lorem
+            ipsum dolor sit amet consectetur adipisicing elit. Deserunt ipsam
+            accusantium quod earum debitis obcaecati, incidunt rem dolor fugit
+            est quidem aspernatur. Nesciunt, fugiat iusto commodi veniam
+            accusantium eligendi excepturi. Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. Deserunt ipsam accusantium quod earum
+            debitis obcaecati, incidunt rem dolor fugit est quidem aspernatur.
+            Nesciunt, fugiat iusto commodi veniam accusantium eligendi
+            excepturi. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Deserunt ipsam accusantium quod earum debitis obcaecati, incidunt
+            rem dolor fugit est quidem aspernatur. Nesciunt, fugiat iusto
+            commodi veniam accusantium eligendi excepturi. Lorem ipsum dolor sit
+            amet consectetur adipisicing elit. Deserunt ipsam accusantium quod
+            earum debitis obcaecati, incidunt rem dolor fugit est quidem
+            aspernatur. Nesciunt, fugiat iusto commodi veniam accusantium
+            eligendi excepturi. Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Deserunt ipsam accusantium quod earum debitis
+            obcaecati, incidunt rem dolor fugit est quidem aspernatur. Nesciunt,
+            fugiat iusto commodi veniam accusantium eligendi excepturi. Lorem
+            ipsum dolor sit amet consectetur adipisicing elit. Deserunt ipsam
+            accusantium quod earum debitis obcaecati, incidunt rem dolor fugit
+            est quidem aspernatur. Nesciunt, fugiat iusto commodi veniam
+            accusantium eligendi excepturi. Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. Deserunt ipsam accusantium quod earum
+            debitis obcaecati, incidunt rem dolor fugit est quidem aspernatur.
+            Nesciunt, fugiat iusto commodi veniam accusantium eligendi
+            excepturi. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Deserunt ipsam accusantium quod earum debitis obcaecati, incidunt
+            rem dolor fugit est quidem aspernatur. Nesciunt, fugiat iusto
+            commodi veniam accusantium eligendi excepturi. Lorem ipsum dolor sit
+            amet consectetur adipisicing elit. Deserunt ipsam accusantium quod
+            earum debitis obcaecati, incidunt rem dolor fugit est quidem
+            aspernatur. Nesciunt, fugiat iusto commodi veniam accusantium
+            eligendi excepturi. Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Deserunt ipsam accusantium quod earum debitis
+            obcaecati, incidunt rem dolor fugit est quidem aspernatur. Nesciunt,
+            fugiat iusto commodi veniam accusantium eligendi excepturi. Lorem
+            ipsum dolor sit amet consectetur adipisicing elit. Deserunt ipsam
+            accusantium quod earum debitis obcaecati, incidunt rem dolor fugit
+            est quidem aspernatur. Nesciunt, fugiat iusto commodi veniam
+            accusantium eligendi excepturi. Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. Deserunt ipsam accusantium quod earum
+            debitis obcaecati, incidunt rem dolor fugit est quidem aspernatur.
+            Nesciunt, fugiat iusto commodi veniam accusantium eligendi
+            excepturi. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Deserunt ipsam accusantium quod earum debitis obcaecati, incidunt
+            rem dolor fugit est quidem aspernatur. Nesciunt, fugiat iusto
+            commodi veniam accusantium eligendi excepturi.
+          </div>
+          <hr class="border-gray-200" />
         </div>
       </div>
     </main>
@@ -60,6 +143,7 @@ import ReadingTime from "@/components/ReadingTime";
 import BookmarkButton from "@/components/BookmarkButton";
 
 export default {
+  name: "article-view",
   components: {
     NavigationBar,
     ReadingTime,
@@ -80,4 +164,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.floatingBar {
+  top: 50%;
+  transform: translateY(-50%);
+}
+</style>

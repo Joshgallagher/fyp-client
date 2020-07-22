@@ -3,13 +3,15 @@
     <button v-if="isBookmarked" @click.prevent="bookmark">
       <ion-icon
         name="bookmark"
-        class="text-xl hover:text-teal-400 transition linear duration-500"
+        :class="`text-${this.size}`"
+        class="hover:text-teal-400 transition linear duration-500 text-black"
       ></ion-icon>
     </button>
     <button v-else @click.prevent="bookmark">
       <ion-icon
         name="bookmark-outline"
-        class="text-xl hover:text-teal-400 transition linear duration-500"
+        :class="`text-${this.size}`"
+        class="hover:text-teal-400 transition linear duration-500 text-black"
       ></ion-icon>
     </button>
   </span>
@@ -21,7 +23,16 @@ import { create, remove } from "@/store/bookmark/api";
 
 export default {
   name: "bookmark-button",
-  props: ["article"],
+  props: {
+    article: {
+      type: Object,
+      required: true
+    },
+    size: {
+      type: String,
+      default: "xl"
+    }
+  },
   data() {
     return {
       isBookmarked: this.article.bookmarked
