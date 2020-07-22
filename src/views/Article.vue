@@ -1,12 +1,7 @@
 <template>
   <div class="flex flex-col min-h-screen bg-gray-100">
     <div class="fixed floatingBar flex flex-col ml-10">
-      <button
-        class="text-2xl hover:text-teal-400 transition linear duration-500 mb-4 flex flex-row items-center"
-      >
-        <ion-icon name="heart-outline"></ion-icon>
-        <p class="text-sm text-gray-700 pl-2">{{ article.rating }}</p>
-      </button>
+      <rating-button :article="article" class="mb-4" />
       <button
         class="text-2xl hover:text-teal-400 transition linear duration-500 mb-4 flex flex-row items-center"
       >
@@ -141,13 +136,15 @@ import { mapGetters } from "vuex";
 import NavigationBar from "@/components/NavigationBar";
 import ReadingTime from "@/components/ReadingTime";
 import BookmarkButton from "@/components/BookmarkButton";
+import RatingButton from "@/components/RatingButton";
 
 export default {
   name: "article-view",
   components: {
     NavigationBar,
     ReadingTime,
-    BookmarkButton
+    BookmarkButton,
+    RatingButton
   },
   beforeRouteEnter(to, from, next) {
     store.dispatch("article/getArticle", to.params.slug).then(() => next());
