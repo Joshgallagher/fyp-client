@@ -3,7 +3,8 @@
     @click="rate"
     class="text-2xl hover:text-teal-400 transition linear duration-500 flex flex-row items-center"
   >
-    <ion-icon name="heart-outline"></ion-icon>
+    <ion-icon v-if="rated" name="heart"></ion-icon>
+    <ion-icon v-else name="heart-outline"></ion-icon>
     <p class="text-sm text-gray-700 pl-2">
       {{ this.rating }}
     </p>
@@ -24,7 +25,8 @@ export default {
   },
   data() {
     return {
-      rating: this.article.rating
+      rating: this.article.rating,
+      rated: this.article.rated
     };
   },
   methods: {
@@ -39,6 +41,7 @@ export default {
 
       if (data.rated) {
         this.rating += 1;
+        this.rated = true;
       }
     }
   }
