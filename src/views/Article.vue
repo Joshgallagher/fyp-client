@@ -8,7 +8,7 @@
         class="text-2xl hover:text-teal-400 transition linear duration-500 mb-4 flex flex-row items-center"
       >
         <ion-icon name="chatbubble-outline"></ion-icon>
-        <p class="text-sm text-gray-700 pl-2">{{ article.commentsCount }}</p>
+        <p class="text-sm text-gray-700 pl-2">{{ comments.length }}</p>
       </button>
       <bookmark-button :article="article" size="2xl" />
     </div>
@@ -153,11 +153,13 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     store.dispatch("article/getArticle", to.params.slug).then(() => next());
+    store.dispatch("comment/getComments", to.params.id).then(() => next());
   },
   computed: {
     ...mapGetters({
       authUser: "auth/oidcUser",
-      article: "article/article"
+      article: "article/article",
+      comments: "comment/comments"
     }),
     createdAt() {
       return moment(this.article.createdAt).format("MMM YY");
