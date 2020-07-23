@@ -1,0 +1,2 @@
+export const CREATED_COMMENT = "CREATED_COMMENT";
+export const SET_COMMENTS = "SET_COMMENTS";

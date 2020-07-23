@@ -7,6 +7,7 @@ import { vuexOidcCreateStoreModule } from "vuex-oidc";
 import article from "./article";
 import user from "./user";
 import bookmark from "./bookmark";
+import comment from "./comment";
 
 Vue.use(Vuex);
 
@@ -18,6 +19,7 @@ export default new Vuex.Store({
     }),
     article,
     user,
-    bookmark
+    bookmark,
+    comment
   }
 });
