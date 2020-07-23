@@ -13,6 +13,7 @@
         </button>
       </span>
       <form
+        v-if="authUser"
         class="my-6 bg-gray-100 p-4 rounded-lg"
         @submit.prevent="createComment"
       >
@@ -44,7 +45,11 @@
         </div>
       </form>
       <template v-for="comment in comments">
-        <comment-item :key="comment.id" :comment="comment" />
+        <comment-item
+          :key="comment.id"
+          :comment="comment"
+          :class="{ 'mt-6': !authUser }"
+        />
       </template>
     </div>
   </div>

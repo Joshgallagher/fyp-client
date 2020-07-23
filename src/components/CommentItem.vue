@@ -24,7 +24,7 @@
       </span>
     </div>
     <div
-      v-if="authUser.sub === comment.userId"
+      v-if="authUser && authUser.sub === comment.userId"
       class="flex flex-row justify-end my-4"
     >
       <button

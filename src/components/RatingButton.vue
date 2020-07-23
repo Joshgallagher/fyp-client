@@ -1,19 +1,32 @@
 <template>
-  <button
-    @click="rate"
-    class="text-2xl hover:text-teal-400 transition linear duration-500 flex flex-row items-center"
-  >
-    <ion-icon v-if="rated" name="heart"></ion-icon>
-    <ion-icon v-else name="heart-outline"></ion-icon>
-    <p class="text-sm text-gray-700 pl-2">
-      {{ this.rating }}
-    </p>
-  </button>
+  <div>
+    <button
+      v-if="authUser"
+      @click="rate"
+      class="text-2xl hover:text-teal-400 transition linear duration-500 flex flex-row items-center"
+    >
+      <ion-icon v-if="rated" name="heart"></ion-icon>
+      <ion-icon v-else name="heart-outline"></ion-icon>
+      <p class="text-sm text-gray-700 pl-2">
+        {{ this.rating }}
+      </p>
+    </button>
+    <button
+      v-else
+      class="text-2xl transition linear duration-500 flex flex-row items-center pointer-events-none"
+    >
+      <ion-icon name="heart-outline"></ion-icon>
+      <p class="text-sm text-gray-700 pl-2">
+        {{ this.rating }}
+      </p>
+    </button>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
 import store from "@/store";
+import { mapGetters } from "vuex";
 
 export default {
   name: "rating-button",
@@ -28,6 +41,11 @@ export default {
       rating: this.article.rating,
       rated: this.article.rated
     };
+  },
+  computed: {
+    ...mapGetters({
+      authUser: "auth/oidcUser"
+    })
   },
   methods: {
     async rate() {
