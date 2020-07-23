@@ -24,13 +24,15 @@
           </span>
         </span>
         <textarea
+          v-model="newComment"
           type="text"
           rows="1"
-          class="form-input w-full focus:h-32 transition linear duration-500 outline-none mb-1"
+          class="h-10 form-input w-full focus:h-32 transition-all linear duration-500 shadow-none mb-1"
           placeholder="What are your thoughts?"
-        ></textarea>
+        />
         <div class="flex flex-row justify-end">
           <button
+            @click="createComment"
             class="px-2 py-1 w-full bg-teal-400 text-white rounded font-bold hover:bg-teal-600 transition linear duration-500"
           >
             Comment
@@ -43,7 +45,7 @@
 
 <script>
 import { EventBus } from "@/main";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "comments-sidebar",
@@ -53,13 +55,14 @@ export default {
       required: true
     }
   },
-  mounted() {
-    EventBus.$on("comments:open", () => (this.open = !this.open));
-  },
   data() {
     return {
+      newComment: "",
       open: false
     };
+  },
+  mounted() {
+    EventBus.$on("comments:open", () => (this.open = !this.open));
   },
   computed: {
     ...mapGetters({
@@ -67,6 +70,15 @@ export default {
     })
   },
   methods: {
+    ...mapActions({
+      create: "comment/createComment"
+    }),
+    async createComment() {
+      await this.create({
+        articleId: this.article.id,
+        comment: this.newComment
+      });
+    },
     closeComments() {
       EventBus.$emit("comments:open", {});
     }
