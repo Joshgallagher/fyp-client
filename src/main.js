@@ -9,6 +9,8 @@ axios.defaults.baseURL = process.env.VUE_APP_API_GATEWAY_URI;
 Vue.config.productionTip = false;
 Vue.config.ignoredElements = [/^ion-/];
 
+export const EventBus = new Vue();
+
 new Vue({
   router,
   store,

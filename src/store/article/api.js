@@ -33,7 +33,16 @@ export const getAll = async () => {
 };
 
 export const getOne = async slug => {
-  const { data } = await axios.get(`articles/${slug}`);
+  const token = store.state.auth.access_token;
+  const requestConfig = {
+    headers: {
+      Authorization: `Bearer ${store.state.auth.access_token}`
+    }
+  };
+  const { data } = await axios.get(
+    `articles/${slug}`,
+    token !== null ? requestConfig : {}
+  );
 
   return data;
 };

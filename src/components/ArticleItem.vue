@@ -1,6 +1,6 @@
 <template>
   <router-link
-    :to="{ name: 'home' }"
+    :to="{ name: 'article', params: { id: article.id, slug: article.slug } }"
     class="group block shadow-md rounded bg-white hover:shadow-xl transition linear duration-500"
   >
     <h1
@@ -39,20 +39,7 @@
           </span>
         </span>
       </span>
-      <template v-if="authUser">
-        <button v-if="isBookmarked" @click.prevent="bookmark">
-          <ion-icon
-            name="bookmark"
-            class="text-xl hover:text-teal-400 transition linear duration-500"
-          ></ion-icon>
-        </button>
-        <button v-else @click.prevent="bookmark">
-          <ion-icon
-            name="bookmark-outline"
-            class="text-xl hover:text-teal-400 transition linear duration-500"
-          ></ion-icon>
-        </button>
-      </template>
+      <bookmark-button :article="article" />
     </router-link>
   </router-link>
 </template>
@@ -60,19 +47,14 @@
 <script>
 import moment from "moment";
 import { mapGetters, mapActions } from "vuex";
-import { create, remove } from "@/store/bookmark/api";
 
 import ReadingTime from "./ReadingTime";
+import BookmarkButton from "@/components/BookmarkButton";
 
 export default {
   name: "article-item",
   props: ["article"],
-  components: { ReadingTime },
-  data() {
-    return {
-      isBookmarked: this.article.bookmarked
-    };
-  },
+  components: { ReadingTime, BookmarkButton },
   computed: {
     ...mapGetters({
       authUser: "auth/oidcUser"
@@ -85,20 +67,7 @@ export default {
     ...mapActions({
       bookmark: "bookmark/bookmark",
       unbookmark: "bookmark/unbookmark"
-    }),
-    async bookmark() {
-      const slug = this.article.slug;
-
-      if (this.isBookmarked) {
-        await remove(slug);
-        this.isBookmarked = false;
-
-        return;
-      }
-
-      await create(slug);
-      this.isBookmarked = true;
-    }
+    })
   }
 };
 </script>
