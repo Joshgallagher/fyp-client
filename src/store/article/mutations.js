@@ -6,5 +6,8 @@ export default {
   },
   [mutationTypes.SET_ARTICLE](state, article) {
     state.article = article;
+  },
+  [mutationTypes.DELETED_ARTICLE](state, slug) {
+    state.articles = state.articles.filter(el => el.slug !== slug);
   }
 };

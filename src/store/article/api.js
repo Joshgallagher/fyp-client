@@ -61,3 +61,17 @@ export const getAllAuthors = async userId => {
 
   return data;
 };
+
+export const remove = async slug => {
+  let response = null;
+
+  try {
+    response = await axios.delete(`articles/${slug}`, {
+      headers: { Authorization: `Bearer ${store.state.auth.access_token}` }
+    });
+  } catch (e) {
+    return e;
+  }
+
+  return response;
+};
