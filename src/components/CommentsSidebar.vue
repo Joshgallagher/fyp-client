@@ -1,9 +1,9 @@
 <template>
   <div
-    class="fixed right-0 w-4/12 p-8 bg-white h-screen shadow-xl z-50 transition-all linear duration-500"
+    class="fixed right-0 w-4/12 bg-white h-screen shadow-xl z-50 transition-all linear duration-500"
     :class="{ hide: this.open === false }"
   >
-    <div class="overflow-scroll">
+    <div class="h-screen overflow-auto p-8">
       <span class="flex flex-row justify-between items-center">
         <h1 class="font-bold text-xl text-black">
           Comments ({{ article.commentsCount }})
@@ -12,7 +12,10 @@
           <ion-icon name="close-outline" class="text-2xl"></ion-icon>
         </button>
       </span>
-      <div class="my-6 bg-gray-100 p-4 rounded-lg">
+      <form
+        class="my-6 bg-gray-100 p-4 rounded-lg"
+        @submit.prevent="createComment"
+      >
         <span class="flex flex-row items-center mb-2">
           <img
             src="https://uifaces.co/our-content/donated/T5rm0m7W.jpg"
@@ -27,18 +30,22 @@
           v-model="newComment"
           type="text"
           rows="1"
+          :class="{ 'h-32': newComment.trim().length > 0 }"
           class="h-10 form-input w-full focus:h-32 transition-all linear duration-500 shadow-none mb-1"
           placeholder="What are your thoughts?"
         />
         <div class="flex flex-row justify-end">
-          <button
-            @click="createComment"
-            class="px-2 py-1 w-full bg-teal-400 text-white rounded font-bold hover:bg-teal-600 transition linear duration-500"
-          >
-            Comment
-          </button>
+          <input
+            :disabled="newComment.trim().length === 0"
+            type="submit"
+            value="Comment"
+            class="px-2 py-1 w-full bg-teal-400 text-white rounded font-bold hover:bg-teal-600 transition linear duration-500 disabled:opacity-75 disabled:bg-teal-700 cursor-pointer disabled:cursor-not-allowed"
+          />
         </div>
-      </div>
+      </form>
+      <template v-for="comment in comments">
+        <comment-item :key="comment.id" :comment="comment" />
+      </template>
     </div>
   </div>
 </template>
@@ -47,6 +54,8 @@
 import { EventBus } from "@/main";
 import { mapGetters, mapActions } from "vuex";
 
+import CommentItem from "@/components/CommentItem";
+
 export default {
   name: "comments-sidebar",
   props: {
@@ -54,6 +63,9 @@ export default {
       type: Object,
       required: true
     }
+  },
+  components: {
+    CommentItem
   },
   data() {
     return {
@@ -66,7 +78,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      authUser: "auth/oidcUser"
+      authUser: "auth/oidcUser",
+      comments: "comment/comments"
     })
   },
   methods: {
@@ -78,6 +91,8 @@ export default {
         articleId: this.article.id,
         comment: this.newComment
       });
+
+      this.newComment = "";
     },
     closeComments() {
       EventBus.$emit("comments:open", {});

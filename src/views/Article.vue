@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col min-h-screen bg-gray-100">
+  <div class="flex flex-col min-h-screen bg-gray-100 fixed">
     <comments-sidebar :article="article" />
     <div class="fixed floatingBar flex flex-col ml-10">
       <rating-button :article="article" class="mb-4" />
@@ -152,6 +152,10 @@ export default {
     CommentsSidebar
   },
   beforeRouteEnter(to, from, next) {
+    store.dispatch("article/getArticle", to.params.slug).then(() => next());
+    store.dispatch("comment/getComments", to.params.id).then(() => next());
+  },
+  beforeRouteUpdate(to, from, next) {
     store.dispatch("article/getArticle", to.params.slug).then(() => next());
     store.dispatch("comment/getComments", to.params.id).then(() => next());
   },
