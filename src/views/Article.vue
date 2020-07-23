@@ -108,7 +108,6 @@
             rem dolor fugit est quidem aspernatur. Nesciunt, fugiat iusto
             commodi veniam accusantium eligendi excepturi.
           </div>
-          <hr class="border-gray-200" />
         </div>
       </div>
     </main>
