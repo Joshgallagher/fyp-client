@@ -24,17 +24,19 @@
     <span v-else class="flex flex-row items-center">
       <router-link
         :to="{ name: 'home' }"
-        class="hover:text-teal-400 transition linear duration-500 mr-6"
+        class="flex items-center hover:text-teal-400 transition text-2xl linear duration-500 mr-6"
         :class="{ 'underline text-teal-400': isHomeRoute }"
       >
-        Home
+        <ion-icon v-if="isHomeRoute" name="home"></ion-icon>
+        <ion-icon v-else name="home-outline"></ion-icon>
       </router-link>
       <router-link
         :to="{ name: 'bookmarks' }"
-        class="hover:text-teal-400 transition linear duration-500 mr-6"
+        class="flex items-center hover:text-teal-400 transition text-2xl linear duration-500 mr-6"
         :class="{ 'underline text-teal-400': isBookmarksRoute }"
       >
-        Bookmarks
+        <ion-icon v-if="isBookmarksRoute" name="bookmark"></ion-icon>
+        <ion-icon v-else name="bookmark-outline"></ion-icon>
       </router-link>
       <router-link
         :to="{ name: 'profile', params: { userId: authUser.sub } }"

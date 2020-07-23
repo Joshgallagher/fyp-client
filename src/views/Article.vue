@@ -39,7 +39,16 @@
                 </span>
               </span>
             </span>
-            <bookmark-button :article="article" />
+            <div class="flex flex-row justify-center items-center">
+              <bookmark-button :article="article" size="2xl" class="pt-2" />
+              <button
+                v-if="authUser && authUser.sub === article.userId"
+                @click="removeArticle"
+                class="ml-4 flex items-center px-2 py-2 bg-red-600 text-white rounded font-medium hover:bg-red-800 transition linear duration-500"
+              >
+                <ion-icon name="trash-outline"></ion-icon>
+              </button>
+            </div>
           </router-link>
           <div class="mt-8 mb-8">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt
@@ -122,7 +131,8 @@
 <script>
 import moment from "moment";
 import store from "@/store";
-import { mapGetters } from "vuex";
+import router from "@/router";
+import { mapGetters, mapActions } from "vuex";
 
 import NavigationBar from "@/components/NavigationBar";
 import ReadingTime from "@/components/ReadingTime";
@@ -157,6 +167,18 @@ export default {
     }),
     createdAt() {
       return moment(this.article.createdAt).format("MMM YY");
+    }
+  },
+  methods: {
+    ...mapActions({
+      deleteArticle: "article/deleteArticle"
+    }),
+    async removeArticle() {
+      if (confirm("Are you sure you want to delete this article?")) {
+        await this.deleteArticle(this.article.slug);
+
+        router.push({ name: "home" });
+      }
     }
   }
 };

@@ -1,2 +1,4 @@
 export const SET_ARTICLES = "SET_ARTICLES";
 export const SET_ARTICLE = "SET_ARTICLE";
+export const DELETED_ARTICLE = "DELETED_ARTICLE";
+
