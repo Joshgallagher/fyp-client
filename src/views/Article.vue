@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col min-h-screen bg-gray-100 fixed">
+  <div class="flex flex-col min-h-screen bg-gray-100">
     <comments-sidebar :article="article" />
     <div class="fixed floatingBar flex flex-col ml-10">
       <rating-button :article="article" class="mb-4" />

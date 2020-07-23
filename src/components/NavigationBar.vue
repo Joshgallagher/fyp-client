@@ -5,6 +5,12 @@
     </router-link>
     <span v-if="!authUser">
       <router-link
+        :to="{ name: 'home' }"
+        class="hover:text-teal-400 transition linear duration-500 mr-6"
+        :class="{ 'underline text-teal-400': isHomeRoute }"
+        >Home</router-link
+      >
+      <router-link
         :to="{ name: 'sign-up' }"
         class="mr-4 px-4 py-2 bg-teal-400 text-white rounded font-bold hover:bg-teal-600 transition linear duration-500"
         >Sign up</router-link
