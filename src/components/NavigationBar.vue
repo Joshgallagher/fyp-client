@@ -23,6 +23,14 @@
     </span>
     <span v-else class="flex flex-row items-center">
       <router-link
+        :to="{ name: 'create-article' }"
+        class="flex items-center hover:text-teal-400 transition text-2xl linear duration-500 mr-6"
+        :class="{ 'underline text-teal-400': isCreateArticleRoute }"
+      >
+        <ion-icon v-if="isCreateArticleRoute" name="add-circle"></ion-icon>
+        <ion-icon v-else name="add-circle-outline"></ion-icon>
+      </router-link>
+      <router-link
         :to="{ name: 'home' }"
         class="flex items-center hover:text-teal-400 transition text-2xl linear duration-500 mr-6"
         :class="{ 'underline text-teal-400': isHomeRoute }"
@@ -72,6 +80,9 @@ export default {
     ...mapGetters({
       authUser: "auth/oidcUser"
     }),
+    isCreateArticleRoute() {
+      return this.$route.matched.some(route => route.name === "create-article");
+    },
     isHomeRoute() {
       return this.$route.matched.some(route => route.name === "home");
     },
