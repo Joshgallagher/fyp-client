@@ -32,14 +32,6 @@ const routes = [
     }
   },
   {
-    path: "/:slug",
-    name: "article",
-    component: Article,
-    meta: {
-      isPublic: true
-    }
-  },
-  {
     path: "/bookmarks",
     name: "bookmarks",
     component: Bookmarks,
@@ -69,6 +61,14 @@ const routes = [
     path: "/callback-error",
     name: "ErrorCallback",
     component: ErrorCallback,
+    meta: {
+      isPublic: true
+    }
+  },
+  {
+    path: "/:slug",
+    name: "article",
+    component: Article,
     meta: {
       isPublic: true
     }
