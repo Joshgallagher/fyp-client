@@ -141,12 +141,14 @@ export default {
     ArticleActionBar
   },
   beforeRouteEnter(to, from, next) {
-    store.dispatch("article/getArticle", to.params.slug).then(() => next());
-    store.dispatch("comment/getComments", to.params.id).then(() => next());
+    store.dispatch("article/getArticle", to.params.slug).then(article => {
+      store.dispatch("comment/getComments", article.id).then(() => next());
+    });
   },
   beforeRouteUpdate(to, from, next) {
-    store.dispatch("article/getArticle", to.params.slug).then(() => next());
-    store.dispatch("comment/getComments", to.params.id).then(() => next());
+    store.dispatch("article/getArticle", to.params.slug).then(article => {
+      store.dispatch("comment/getComments", article.id).then(() => next());
+    });
   },
   computed: {
     ...mapGetters({

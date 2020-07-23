@@ -12,6 +12,8 @@ export const getArticle = async ({ commit }, slug) => {
   const data = await getOne(slug);
 
   commit(mutationTypes.SET_ARTICLE, data);
+
+  return data;
 };
 
 export const getAuthorArticles = async ({ commit }, userId) => {
