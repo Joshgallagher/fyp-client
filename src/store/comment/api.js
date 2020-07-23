@@ -22,3 +22,33 @@ export const getAll = async articleId => {
 
   return data;
 };
+
+export const update = async (commentId, comment) => {
+  let response = null;
+
+  try {
+    response = await axios.put(
+      `comments/${commentId}`,
+      { comment },
+      { headers: { Authorization: `Bearer ${store.state.auth.access_token}` } }
+    );
+  } catch (e) {
+    return e;
+  }
+
+  return response;
+};
+
+export const remove = async commentId => {
+  let response = null;
+
+  try {
+    response = await axios.delete(`comments/${commentId}`, {
+      headers: { Authorization: `Bearer ${store.state.auth.access_token}` }
+    });
+  } catch (e) {
+    return e;
+  }
+
+  return response;
+};

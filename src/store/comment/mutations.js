@@ -6,5 +6,8 @@ export default {
   },
   [mutationTypes.SET_COMMENTS](state, comments) {
     state.comments = comments;
+  },
+  [mutationTypes.DELETED_COMMENT](state, commentId) {
+    state.comments = state.comments.filter(el => el.id !== commentId);
   }
 };
