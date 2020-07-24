@@ -2,7 +2,7 @@
   <div class="mb-4 last:mb-0">
     <div class="flex flex-row items-start mb-2">
       <img
-        src="https://uifaces.co/our-content/donated/T5rm0m7W.jpg"
+        src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"
         alt="Avatar"
         class="w-12 h-auto mr-4 rounded-full"
       />
