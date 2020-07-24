@@ -7,7 +7,7 @@
       <div class="grid grid-cols-6 gap-8">
         <div class="col-start-2 col-end-6">
           <h1 class="font-bold text-6xl mt-8 mb-2">{{ article.title }}</h1>
-          <p class="text-2xl text-gray-700">
+          <p class="text-2xl text-gray-700 leading-relaxed">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor
             asperiores perferendis voluptatem possimus similique enim saepe sit,
             expedita dolores? Libero commodi id temporibus nemo assumenda
