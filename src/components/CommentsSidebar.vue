@@ -19,7 +19,7 @@
       >
         <span class="flex flex-row items-center mb-2">
           <img
-            src="https://uifaces.co/our-content/donated/T5rm0m7W.jpg"
+            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"
             alt="Avatar"
             class="w-8 h-auto mr-2 rounded-full"
           />
