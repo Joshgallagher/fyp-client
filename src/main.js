@@ -3,6 +3,9 @@ import axios from "axios";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import Editor from "vue-editor-js";
+
+Vue.use(Editor);
 
 axios.defaults.baseURL = process.env.VUE_APP_API_GATEWAY_URI;
 

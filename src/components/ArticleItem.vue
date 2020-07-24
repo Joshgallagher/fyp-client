@@ -1,6 +1,6 @@
 <template>
   <router-link
-    :to="{ name: 'article', params: { id: article.id, slug: article.slug } }"
+    :to="{ name: 'article', params: { slug: article.slug } }"
     class="group block shadow-md rounded bg-white hover:shadow-xl transition linear duration-500"
   >
     <h1

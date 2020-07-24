@@ -1,14 +1,14 @@
 import axios from "axios";
 import store from "@/store";
 
-export const create = async (token, title, body) => {
+export const create = async (title, body) => {
   let response = null;
 
   try {
     response = await axios.post(
       "articles",
       { title, body },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { headers: { Authorization: `Bearer ${store.state.auth.access_token}` } }
     );
   } catch (e) {
     return e;
