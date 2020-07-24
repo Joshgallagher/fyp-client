@@ -62,6 +62,22 @@ export const getAllAuthors = async userId => {
   return data;
 };
 
+export const update = async (slug, title, subtitle, body) => {
+  let response = null;
+
+  try {
+    response = await axios.put(
+      `articles/${slug}`,
+      { title, subtitle, body },
+      { headers: { Authorization: `Bearer ${store.state.auth.access_token}` } }
+    );
+  } catch (e) {
+    return e;
+  }
+
+  return response;
+};
+
 export const remove = async slug => {
   let response = null;
 

@@ -38,11 +38,15 @@
             </span>
             <div class="flex flex-row justify-center items-center">
               <bookmark-button :article="article" size="2xl" class="pt-2" />
-              <button
+              <router-link
+                v-if="authUser && authUser.sub === article.userId"
+                :to="{
+                  name: 'update-article',
+                  params: { slug: article.slug }
+                }"
                 class="ml-3 px-2 py-1 text-gray-700 rounded font-medium hover:bg-gray-200 transition linear duration-500"
+                >Update</router-link
               >
-                Update
-              </button>
               <button
                 v-if="authUser && authUser.sub === article.userId"
                 @click="removeArticle"
