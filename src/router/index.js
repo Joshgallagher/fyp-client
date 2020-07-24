@@ -6,6 +6,8 @@ import store from "@/store";
 import Home from "../views/Home.vue";
 import Profile from "../views/Profile.vue";
 import Article from "../views/Article.vue";
+import CreateArticle from "../views/CreateArticle.vue";
+import UpdateArticle from "../views/UpdateArticle.vue";
 import Bookmarks from "../views/Bookmarks.vue";
 import SignUp from "../views/SignUp.vue";
 import Callback from "../views/auth/Callback.vue";
@@ -63,6 +65,22 @@ const routes = [
     component: ErrorCallback,
     meta: {
       isPublic: true
+    }
+  },
+  {
+    path: "/create",
+    name: "create-article",
+    component: CreateArticle,
+    meta: {
+      isPublic: false
+    }
+  },
+  {
+    path: "/edit/:slug",
+    name: "update-article",
+    component: UpdateArticle,
+    meta: {
+      isPublic: false
     }
   },
   {

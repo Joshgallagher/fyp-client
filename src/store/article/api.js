@@ -1,14 +1,14 @@
 import axios from "axios";
 import store from "@/store";
 
-export const create = async (token, title, body) => {
+export const create = async (title, subtitle, body) => {
   let response = null;
 
   try {
     response = await axios.post(
       "articles",
-      { title, body },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { title, subtitle, body },
+      { headers: { Authorization: `Bearer ${store.state.auth.access_token}` } }
     );
   } catch (e) {
     return e;
@@ -60,6 +60,22 @@ export const getAllAuthors = async userId => {
   );
 
   return data;
+};
+
+export const update = async (slug, title, subtitle, body) => {
+  let response = null;
+
+  try {
+    response = await axios.put(
+      `articles/${slug}`,
+      { title, subtitle, body },
+      { headers: { Authorization: `Bearer ${store.state.auth.access_token}` } }
+    );
+  } catch (e) {
+    return e;
+  }
+
+  return response;
 };
 
 export const remove = async slug => {

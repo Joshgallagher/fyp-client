@@ -1,4 +1,6 @@
 export default {
   articles: [],
-  article: {}
+  article: {
+    body: { blocks: [{}] }
+  }
 };

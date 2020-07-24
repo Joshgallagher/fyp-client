@@ -1,6 +1,6 @@
 <template>
   <router-link
-    :to="{ name: 'article', params: { id: article.id, slug: article.slug } }"
+    :to="{ name: 'article', params: { slug: article.slug } }"
     class="group block shadow-md rounded bg-white hover:shadow-xl transition linear duration-500"
   >
     <h1
@@ -9,8 +9,7 @@
       {{ article.title }}
     </h1>
     <p class="mb-6 px-4 text-gray-700">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
-      delectus rerum doloribus possimus.
+      {{ article.subtitle }}
     </p>
     <hr class="border-gray-200" />
     <router-link
