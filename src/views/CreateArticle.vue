@@ -66,13 +66,10 @@ import List from "@editorjs/list";
 import CodeTool from "@editorjs/code";
 import Embed from "@editorjs/embed";
 import Table from "@editorjs/table";
-import Checklist from "@editorjs/checklist";
 import Marker from "@editorjs/marker";
-import Warning from "@editorjs/warning";
 import Quote from "@editorjs/quote";
 import InlineCode from "@editorjs/inline-code";
 import Delimiter from "@editorjs/delimiter";
-import SimpleImage from "@editorjs/simple-image";
 
 export default {
   name: "create-article-view",
@@ -91,7 +88,7 @@ export default {
             config: {
               placeholder: "Enter a header",
               levels: [2, 3, 4],
-              defaultLevel: 3
+              defaultLevel: 2
             }
           },
           list: {
@@ -122,21 +119,9 @@ export default {
               cols: 3
             }
           },
-          checklist: {
-            class: Checklist
-          },
           Marker: {
             class: Marker,
             shortcut: "CMD+SHIFT+M"
-          },
-          warning: {
-            class: Warning,
-            inlineToolbar: true,
-            shortcut: "CMD+SHIFT+W",
-            config: {
-              titlePlaceholder: "Title",
-              messagePlaceholder: "Message"
-            }
           },
           quote: {
             class: Quote,
@@ -151,8 +136,7 @@ export default {
             class: InlineCode,
             shortcut: "CMD+SHIFT+M"
           },
-          delimiter: Delimiter,
-          image: SimpleImage
+          delimiter: Delimiter
         },
         data: {
           time: 1591362820044,
@@ -172,7 +156,7 @@ export default {
   methods: {
     async publish() {
       const editorBlocks = await this.$refs.editor.state.editor.save();
-      await create(this.title, String(editorBlocks)).then(({ data }) =>
+      await create(this.title, JSON.stringify(editorBlocks)).then(({ data }) =>
         router.push({ name: "article", params: { slug: data.slug } })
       );
     }

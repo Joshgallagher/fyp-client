@@ -51,71 +51,69 @@
             </div>
           </router-link>
           <div class="mt-8 mb-8">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt
-            ipsam accusantium quod earum debitis obcaecati, incidunt rem dolor
-            fugit est quidem aspernatur. Nesciunt, fugiat iusto commodi veniam
-            accusantium eligendi excepturi. Lorem ipsum dolor sit amet
-            consectetur adipisicing elit. Deserunt ipsam accusantium quod earum
-            debitis obcaecati, incidunt rem dolor fugit est quidem aspernatur.
-            Nesciunt, fugiat iusto commodi veniam accusantium eligendi
-            excepturi. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Deserunt ipsam accusantium quod earum debitis obcaecati, incidunt
-            rem dolor fugit est quidem aspernatur. Nesciunt, fugiat iusto
-            commodi veniam accusantium eligendi excepturi. Lorem ipsum dolor sit
-            amet consectetur adipisicing elit. Deserunt ipsam accusantium quod
-            earum debitis obcaecati, incidunt rem dolor fugit est quidem
-            aspernatur. Nesciunt, fugiat iusto commodi veniam accusantium
-            eligendi excepturi. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Deserunt ipsam accusantium quod earum debitis
-            obcaecati, incidunt rem dolor fugit est quidem aspernatur. Nesciunt,
-            fugiat iusto commodi veniam accusantium eligendi excepturi. Lorem
-            ipsum dolor sit amet consectetur adipisicing elit. Deserunt ipsam
-            accusantium quod earum debitis obcaecati, incidunt rem dolor fugit
-            est quidem aspernatur. Nesciunt, fugiat iusto commodi veniam
-            accusantium eligendi excepturi. Lorem ipsum dolor sit amet
-            consectetur adipisicing elit. Deserunt ipsam accusantium quod earum
-            debitis obcaecati, incidunt rem dolor fugit est quidem aspernatur.
-            Nesciunt, fugiat iusto commodi veniam accusantium eligendi
-            excepturi. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Deserunt ipsam accusantium quod earum debitis obcaecati, incidunt
-            rem dolor fugit est quidem aspernatur. Nesciunt, fugiat iusto
-            commodi veniam accusantium eligendi excepturi. Lorem ipsum dolor sit
-            amet consectetur adipisicing elit. Deserunt ipsam accusantium quod
-            earum debitis obcaecati, incidunt rem dolor fugit est quidem
-            aspernatur. Nesciunt, fugiat iusto commodi veniam accusantium
-            eligendi excepturi. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Deserunt ipsam accusantium quod earum debitis
-            obcaecati, incidunt rem dolor fugit est quidem aspernatur. Nesciunt,
-            fugiat iusto commodi veniam accusantium eligendi excepturi. Lorem
-            ipsum dolor sit amet consectetur adipisicing elit. Deserunt ipsam
-            accusantium quod earum debitis obcaecati, incidunt rem dolor fugit
-            est quidem aspernatur. Nesciunt, fugiat iusto commodi veniam
-            accusantium eligendi excepturi. Lorem ipsum dolor sit amet
-            consectetur adipisicing elit. Deserunt ipsam accusantium quod earum
-            debitis obcaecati, incidunt rem dolor fugit est quidem aspernatur.
-            Nesciunt, fugiat iusto commodi veniam accusantium eligendi
-            excepturi. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Deserunt ipsam accusantium quod earum debitis obcaecati, incidunt
-            rem dolor fugit est quidem aspernatur. Nesciunt, fugiat iusto
-            commodi veniam accusantium eligendi excepturi. Lorem ipsum dolor sit
-            amet consectetur adipisicing elit. Deserunt ipsam accusantium quod
-            earum debitis obcaecati, incidunt rem dolor fugit est quidem
-            aspernatur. Nesciunt, fugiat iusto commodi veniam accusantium
-            eligendi excepturi. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Deserunt ipsam accusantium quod earum debitis
-            obcaecati, incidunt rem dolor fugit est quidem aspernatur. Nesciunt,
-            fugiat iusto commodi veniam accusantium eligendi excepturi. Lorem
-            ipsum dolor sit amet consectetur adipisicing elit. Deserunt ipsam
-            accusantium quod earum debitis obcaecati, incidunt rem dolor fugit
-            est quidem aspernatur. Nesciunt, fugiat iusto commodi veniam
-            accusantium eligendi excepturi. Lorem ipsum dolor sit amet
-            consectetur adipisicing elit. Deserunt ipsam accusantium quod earum
-            debitis obcaecati, incidunt rem dolor fugit est quidem aspernatur.
-            Nesciunt, fugiat iusto commodi veniam accusantium eligendi
-            excepturi. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Deserunt ipsam accusantium quod earum debitis obcaecati, incidunt
-            rem dolor fugit est quidem aspernatur. Nesciunt, fugiat iusto
-            commodi veniam accusantium eligendi excepturi.
+            <template v-for="(block, i) in JSON.parse(article.body).blocks">
+              <p
+                :key="i"
+                v-if="block.type === 'paragraph'"
+                class="mb-6 last:mb-0 leading-relaxed"
+                v-html="block.data.text"
+              />
+              <template v-else-if="block.type === 'header'">
+                <h2
+                  v-if="block.data.level === 2"
+                  :key="i"
+                  class="text-2xl font-bold mb-2 last:mb-0"
+                >
+                  {{ block.data.text }}
+                </h2>
+                <h3
+                  v-else-if="block.data.level === 3"
+                  :key="i"
+                  class="text-xl font-bold mb-2 last:mb-0"
+                >
+                  {{ block.data.text }}
+                </h3>
+                <h4 v-else :key="i" class="text-lg font-bold mb-2 last:mb-0">
+                  {{ block.data.text }}
+                </h4>
+              </template>
+              <template v-else-if="block.type === 'list'">
+                <ul
+                  v-if="block.data.style === 'unordered'"
+                  :key="i"
+                  class="list-disc ml-5 mb-4"
+                >
+                  <template v-for="(item, itemIndex) in block.data.items">
+                    <li :key="itemIndex" class="mb-1">{{ item }}</li>
+                  </template>
+                </ul>
+                <ol
+                  v-if="block.data.style === 'ordered'"
+                  :key="i"
+                  class="list-decimal ml-5"
+                >
+                  <template v-for="(item, itemIndex) in block.data.items">
+                    <li :key="itemIndex">{{ item }}</li>
+                  </template>
+                </ol>
+              </template>
+              <code v-else-if="block.type === 'code'" :key="i">
+                <pre class="bg-gray-100 rounded py-6 mb-4">
+                {{ block.data.code }}
+                </pre>
+              </code>
+              <div v-else-if="block.type === 'quote'" :key="i">
+                <p class="font-bold">{{ block.data.caption }}</p>
+                <blockquote class="ml-4 text-gray-700">
+                  {{ block.data.text }}
+                </blockquote>
+              </div>
+              <hr
+                v-else-if="block.type === 'delimiter'"
+                :key="i"
+                class="border-gray-200 my-6"
+              />
+            </template>
           </div>
         </div>
       </div>
