@@ -9,8 +9,7 @@
       {{ article.title }}
     </h1>
     <p class="mb-6 px-4 text-gray-700">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
-      delectus rerum doloribus possimus.
+      {{ article.subtitle }}
     </p>
     <hr class="border-gray-200" />
     <router-link

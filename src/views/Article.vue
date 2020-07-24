@@ -8,10 +8,7 @@
         <div class="col-start-2 col-end-6">
           <h1 class="font-bold text-6xl mt-8 mb-2">{{ article.title }}</h1>
           <p class="text-2xl text-gray-700 leading-relaxed">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor
-            asperiores perferendis voluptatem possimus similique enim saepe sit,
-            expedita dolores? Libero commodi id temporibus nemo assumenda
-            suscipit totam cumque repudiandae incidunt?
+            {{ article.subtitle }}
           </p>
           <router-link
             :to="{ name: 'profile', params: { userId: article.userId } }"
@@ -41,6 +38,11 @@
             </span>
             <div class="flex flex-row justify-center items-center">
               <bookmark-button :article="article" size="2xl" class="pt-2" />
+              <button
+                class="ml-3 px-2 py-1 text-gray-700 rounded font-medium hover:bg-gray-200 transition linear duration-500"
+              >
+                Update
+              </button>
               <button
                 v-if="authUser && authUser.sub === article.userId"
                 @click="removeArticle"

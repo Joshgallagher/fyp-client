@@ -156,7 +156,11 @@ export default {
   methods: {
     async publish() {
       const editorBlocks = await this.$refs.editor.state.editor.save();
-      await create(this.title, JSON.stringify(editorBlocks)).then(({ data }) =>
+      await create(
+        this.title,
+        this.subtitle,
+        JSON.stringify(editorBlocks)
+      ).then(({ data }) =>
         router.push({ name: "article", params: { slug: data.slug } })
       );
     }
