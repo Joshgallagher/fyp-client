@@ -6,7 +6,7 @@
     <div class="h-screen overflow-auto p-8">
       <span class="flex flex-row justify-between items-center">
         <h1 class="font-bold text-xl text-black">
-          Comments ({{ article.commentsCount }})
+          Comments ({{ comments.length }})
         </h1>
         <button class="text-black" @click="closeComments">
           <ion-icon name="close-outline" class="text-2xl"></ion-icon>

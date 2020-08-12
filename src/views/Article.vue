@@ -10,32 +10,34 @@
           <p class="text-2xl text-gray-700 leading-relaxed">
             {{ article.subtitle }}
           </p>
-          <router-link
-            :to="{ name: 'profile', params: { userId: article.userId } }"
-            class="flex flex-row justify-between items-center pt-8 pb-4 transition linear duration-500"
-          >
-            <span class="flex flex-row">
-              <img
-                src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"
-                alt="Avatar"
-                class="w-12 h-auto mr-4 rounded-full"
-              />
-              <span class="flex flex-col justify-between">
-                <p class="font-medium">
-                  <span class="font-normal">Published by</span>
-                  {{ article.author }}
-                </p>
-                <span class="flex flex-row">
-                  <time
-                    :datetime="article.createdAt"
-                    class="text-gray-700 text-sm mr-1"
-                    >{{ createdAt }}</time
-                  >
-                  <span class="text-gray-700 text-sm mr-1">·</span>
-                  <reading-time :content="article.body" />
+          <div class="flex flex-row justify-between">
+            <router-link
+              :to="{ name: 'profile', params: { userId: article.userId } }"
+              class="flex flex-row justify-between items-center pt-8 pb-4 transition linear duration-500"
+            >
+              <span class="flex flex-row">
+                <img
+                  src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"
+                  alt="Avatar"
+                  class="w-12 h-auto mr-4 rounded-full"
+                />
+                <span class="flex flex-col justify-between">
+                  <p class="font-medium">
+                    <span class="font-normal">Published by</span>
+                    {{ article.author }}
+                  </p>
+                  <span class="flex flex-row">
+                    <time
+                      :datetime="article.createdAt"
+                      class="text-gray-700 text-sm mr-1"
+                      >{{ createdAt }}</time
+                    >
+                    <span class="text-gray-700 text-sm mr-1">·</span>
+                    <reading-time :content="article.body" />
+                  </span>
                 </span>
               </span>
-            </span>
+            </router-link>
             <div class="flex flex-row justify-center items-center">
               <bookmark-button :article="article" size="2xl" class="pt-2" />
               <router-link
@@ -55,7 +57,7 @@
                 <ion-icon name="trash-outline"></ion-icon>
               </button>
             </div>
-          </router-link>
+          </div>
           <div class="mt-8 mb-8">
             <template v-for="(block, i) in JSON.parse(article.body).blocks">
               <p
